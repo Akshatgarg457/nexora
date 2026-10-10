@@ -1,0 +1,93 @@
+:root {
+  --brand-primary: #4F46E5;
+  --brand-hover: #4338CA;
+  --brand-light: #EEF2FF;
+  --brand-border: #E0E7FF;
+  --brand-ink: #0F172A;
+  --brand-muted: #64748B;
+  --brand-success: #10B981;
+  --brand-warning: #F59E0B;
+  --brand-danger: #EF4444;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --bg-canvas: #F8FAFC;
+  --card-bg: #FFFFFF;
+}
+
+/* Midnight Dark Preset */
+[data-theme="midnight"] {
+  --brand-primary: #6366F1;
+  --brand-hover: #818CF8;
+  --brand-light: #1E293B;
+  --brand-border: #334155;
+  --brand-ink: #F8FAFC;
+  --brand-muted: #94A3B8;
+  --bg-canvas: #0F172A;
+  --card-bg: #1E293B;
+}
+
+/* Slate Neutral Preset */
+[data-theme="slate"] {
+  --brand-primary: #0F172A;
+  --brand-hover: #1E293B;
+  --brand-light: #F1F5F9;
+  --brand-border: #E2E8F0;
+  --brand-ink: #0F172A;
+  --brand-muted: #64748B;
+  --bg-canvas: #F8FAFC;
+  --card-bg: #FFFFFF;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-canvas);
+  color: var(--brand-ink);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Custom Corporate Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Enterprise Card Styling */
+.corp-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+}
+
+.corp-card-hover:hover {
+  border-color: #C7D2FE;
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.08);
+}
+
+.corp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--brand-border);
+  background-color: var(--brand-light);
+  color: var(--brand-primary);
+}
