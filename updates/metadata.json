@@ -1,0 +1,6 @@
+{
+  "name": "Nexora - Adaptive AI Workspace Platform",
+  "description": "An intelligent workspace platform that reshapes itself around your current intent. Manage meetings, communication, study, projects, and analytics dynamically.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

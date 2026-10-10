@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+@custom-variant midnight (&:where([data-theme="midnight"], [data-theme="midnight"] *, .midnight, .midnight *));
+@custom-variant forest (&:where([data-theme="forest"], [data-theme="forest"] *, .forest, .forest *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *, .light, .light *));
+
+@layer base {
+  :root {
+    --canvas: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-secondary: #F1F5F9;
+    --surface-glass: rgba(255, 255, 255, 0.85);
+    --ink-primary: #0F172A;
+    --ink-secondary: #475569;
+    --ink-tertiary: #94A3B8;
+    --brand-indigo: #4F46E5;
+    --brand-teal: #0D9488;
+    --brand-amber: #D97706;
+    --accent-primary: #4F46E5;
+    --accent-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #4338CA 100%);
+    --border-subtle: #E2E8F0;
+    --border-hover: #CBD5E1;
+    --glow-color: rgba(79, 70, 229, 0.08);
+  }
+
+  :root.dark, [data-theme="dark"] {
+    --canvas: #090D16;
+    --surface: #0F172A;
+    --surface-secondary: #131E35;
+    --surface-glass: rgba(15, 23, 42, 0.78);
+    --ink-primary: #F8FAFC;
+    --ink-secondary: #94A3B8;
+    --ink-tertiary: #64748B;
+    --brand-indigo: #6366F1;
+    --brand-teal: #14B8A6;
+    --brand-amber: #F59E0B;
+    --accent-primary: #6366F1;
+    --accent-gradient: linear-gradient(135deg, #6366F1 0%, #4F46E5 50%, #7C3AED 100%);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(99, 102, 241, 0.4);
+    --glow-color: rgba(99, 102, 241, 0.16);
+  }
+
+  :root.midnight, [data-theme="midnight"] {
+    --canvas: #060818;
+    --surface: #0D1129;
+    --surface-secondary: #13193D;
+    --surface-glass: rgba(13, 17, 41, 0.78);
+    --ink-primary: #F1F5F9;
+    --ink-secondary: #94A3B8;
+    --ink-tertiary: #64748B;
+    --brand-indigo: #818CF8;
+    --brand-teal: #38BDF8;
+    --brand-amber: #FBBF24;
+    --accent-primary: #818CF8;
+    --accent-gradient: linear-gradient(135deg, #818CF8 0%, #6366F1 50%, #38BDF8 100%);
+    --border-subtle: rgba(129, 140, 248, 0.16);
+    --border-hover: rgba(129, 140, 248, 0.45);
+    --glow-color: rgba(129, 140, 248, 0.2);
+  }
+
+  :root.forest, [data-theme="forest"] {
+    --canvas: #08120F;
+    --surface: #0E1D19;
+    --surface-secondary: #142923;
+    --surface-glass: rgba(14, 29, 25, 0.78);
+    --ink-primary: #F0FDF4;
+    --ink-secondary: #99F6E4;
+    --ink-tertiary: #5EEAD4;
+    --brand-indigo: #10B981;
+    --brand-teal: #14B8A6;
+    --brand-amber: #F59E0B;
+    --accent-primary: #10B981;
+    --accent-gradient: linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%);
+    --border-subtle: rgba(16, 185, 129, 0.18);
+    --border-hover: rgba(16, 185, 129, 0.45);
+    --glow-color: rgba(16, 185, 129, 0.2);
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink-primary);
+    background-color: var(--canvas);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle architectural dot grid */
+.bg-grid-subtle {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .bg-grid-subtle, [data-theme="dark"] .bg-grid-subtle {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.midnight .bg-grid-subtle, [data-theme="midnight"] .bg-grid-subtle {
+  background-image: radial-gradient(rgba(129, 140, 248, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.forest .bg-grid-subtle, [data-theme="forest"] .bg-grid-subtle {
+  background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Luminous ambient glow */
+.ambient-glow {
+  background: radial-gradient(circle at 50% 0%, var(--glow-color), transparent 60%);
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb,
+.midnight ::-webkit-scrollbar-thumb,
+.forest ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Nexora Aesthetic Card System */
+.nx-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nx-card-glass {
+  background-color: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+}
+
+.nx-card-interactive {
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nx-card-interactive:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 24px -4px var(--glow-color);
+  transform: translateY(-1px);
+}
+
+.nx-surface-secondary {
+  background-color: var(--surface-secondary);
+}
+
+.nx-border {
+  border-color: var(--border-subtle);
+}
+
+.nx-input {
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--ink-primary);
+  border-radius: 0.75rem;
+  transition: all 0.15s ease;
+}
+.nx-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--glow-color);
+}
+
+.nx-btn-primary {
+  background: var(--accent-gradient);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 14px -2px var(--glow-color);
+}
+.nx-btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 20px 0 var(--glow-color);
+}
+.nx-btn-primary:active {
+  transform: scale(0.98);
+}

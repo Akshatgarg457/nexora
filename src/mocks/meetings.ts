@@ -1,0 +1,85 @@
+import { Meeting } from '../types';
+
+export const initialMeetings: Meeting[] = [
+  {
+    id: 'meet-1',
+    title: 'Acme Corp: Enterprise Platform Rollout & Architecture Review',
+    client: 'David Vance (VP Technology)',
+    company: 'Acme Corporation',
+    date: '2026-10-11',
+    time: '10:00 AM - 11:15 AM',
+    durationMinutes: 75,
+    location: 'Conference Room Alpha / Virtual Hybrid',
+    attendees: ['David Vance', 'Sarah Jenkins (Solutions Lead)', 'Marcus Lee (CTO)', 'You'],
+    agenda: [
+      { id: 'ag-1', title: 'Review Q4 migration timeline and critical milestones', durationMinutes: 20, completed: true },
+      { id: 'ag-2', title: 'Evaluate hybrid cloud network latency benchmarks', durationMinutes: 25, completed: false },
+      { id: 'ag-3', title: 'Security sign-off on OAuth 2.1 & RBAC policy implementation', durationMinutes: 15, completed: false },
+      { id: 'ag-4', title: 'Agree on SLA commitments and tier-1 emergency escalation', durationMinutes: 15, completed: false },
+    ],
+    notes: 'Acme Corp is transitioning 1,400 seats to the new adaptive workspace. David stressed that zero downtime during peak EU morning hours is an absolute requirement. They expressed appreciation for our API readiness.',
+    actionItems: [
+      { id: 'act-1', task: 'Send updated disaster recovery architecture diagram to David', assignee: 'Sarah Jenkins', dueDate: '2026-10-12', completed: false },
+      { id: 'act-2', task: 'Finalize latency benchmark numbers for Frankfurt data cluster', assignee: 'Marcus Lee', dueDate: '2026-10-11', completed: false },
+      { id: 'act-3', task: 'Draft custom SLA addendum with 99.99% uptime guarantee', assignee: 'You', dueDate: '2026-10-13', completed: false },
+    ],
+    checklist: [
+      { id: 'chk-1', item: 'Review previous Acme rollout retrospective notes', done: true },
+      { id: 'chk-2', item: 'Verify European cloud latency status dashboard', done: true },
+      { id: 'chk-3', item: 'Confirm attendee acceptance and screen-share permissions', done: false },
+      { id: 'chk-4', item: 'Prepare executive summary slide deck', done: false },
+    ],
+    isToday: true,
+  },
+  {
+    id: 'meet-2',
+    title: 'Weekly Cross-Functional Product & Engineering Sync',
+    client: 'Internal Core Team',
+    company: 'Nexora Core',
+    date: '2026-10-11',
+    time: '02:00 PM - 02:45 PM',
+    durationMinutes: 45,
+    location: 'Virtual Huddle 3',
+    attendees: ['Elena Rostova (Head of Product)', 'Devin Vance (Eng Lead)', 'Priya Patel (UX)', 'You'],
+    agenda: [
+      { id: 'ag-5', title: 'Sprint 24 velocity review & blockers', durationMinutes: 15, completed: false },
+      { id: 'ag-6', title: 'Intent classification accuracy metrics on v2 model', durationMinutes: 20, completed: false },
+      { id: 'ag-7', title: 'Spring Boot REST endpoint contract validation', durationMinutes: 10, completed: false },
+    ],
+    notes: 'Focus on reducing widget re-rendering flicker when intent updates dynamically. Front-end architecture must support hot-swapping configuration payloads seamlessly.',
+    actionItems: [
+      { id: 'act-4', task: 'Benchmark intent classification regex vs token parser performance', assignee: 'Devin Vance', dueDate: '2026-10-14', completed: true },
+      { id: 'act-5', task: 'Deliver Figma tokens for high-contrast accessibility mode', assignee: 'Priya Patel', dueDate: '2026-10-15', completed: false },
+    ],
+    checklist: [
+      { id: 'chk-5', item: 'Collate pull request metrics for Sprint 24', done: true },
+      { id: 'chk-6', item: 'Draft quick agenda bullets into shared Slack channel', done: true },
+    ],
+    isToday: true,
+  },
+  {
+    id: 'meet-3',
+    title: 'Starlight Global: Annual Contract Renewal & Expansion Strategy',
+    client: 'Jonathan Meyer (Director of IT Operations)',
+    company: 'Starlight Global',
+    date: '2026-10-12',
+    time: '11:00 AM - 12:00 PM',
+    durationMinutes: 60,
+    location: 'Executive Briefing Suite',
+    attendees: ['Jonathan Meyer', 'Rachel Zhao (Account Director)', 'You'],
+    agenda: [
+      { id: 'ag-8', title: 'Review 2026 adoption metrics across 8 global departments', durationMinutes: 20, completed: false },
+      { id: 'ag-9', title: 'Demonstrate new automated triage & project kanban engine', durationMinutes: 25, completed: false },
+      { id: 'ag-10', title: 'Commercial proposal for additional 500 team seats', durationMinutes: 15, completed: false },
+    ],
+    notes: 'Jonathan noted that their remote engineering teams saw a 28% drop in meeting overhead after adopting the adaptive workspace.',
+    actionItems: [
+      { id: 'act-6', task: 'Send updated enterprise pricing tier sheet', assignee: 'Rachel Zhao', dueDate: '2026-10-13', completed: false },
+    ],
+    checklist: [
+      { id: 'chk-7', item: 'Export Starlight adoption statistics to PDF', done: false },
+      { id: 'chk-8', item: 'Check seat utilization logs for discrepancies', done: false },
+    ],
+    isToday: false,
+  },
+];
