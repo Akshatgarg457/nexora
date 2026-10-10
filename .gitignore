@@ -7,6 +7,8 @@ target/
 # Node & Frontend
 frontend/node_modules/
 frontend/dist/
+demo-frontend/node_modules/
+demo-frontend/dist/
 node_modules/
 dist/
 
@@ -14,6 +16,7 @@ dist/
 .env
 .env.*
 *.env
+demo-frontend/.env
 
 # IDE & OS Caches
 .idea
