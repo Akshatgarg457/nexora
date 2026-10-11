@@ -17,6 +17,11 @@ dist/
 .env.*
 *.env
 demo-frontend/.env
+# Templates hold placeholders only and must stay tracked, otherwise a fresh
+# clone has no record of which variables the application requires.
+# Leading slash anchors this to the backend root so frontend templates are
+# left exactly as they were.
+!/.env.example
 
 # IDE & OS Caches
 .idea

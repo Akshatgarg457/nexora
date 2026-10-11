@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.Optional;
 
@@ -14,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
+// @ActiveProfiles alone cannot stop an exported NEXORA_BOOTSTRAP_ENABLED=false
+// from overriding application-test.properties, because OS environment variables
+// outrank profile-specific classpath properties. @TestPropertySource is added
+// above the environment, which pins the fixtures this test asserts against.
+@TestPropertySource(locations = "classpath:application-test.properties")
 class BootstrapAdminTest {
 
     @Autowired
