@@ -7,8 +7,6 @@ target/
 # Node & Frontend
 frontend/node_modules/
 frontend/dist/
-demo-frontend/node_modules/
-demo-frontend/dist/
 node_modules/
 dist/
 
@@ -16,11 +14,9 @@ dist/
 .env
 .env.*
 *.env
-demo-frontend/.env
 # Templates hold placeholders only and must stay tracked, otherwise a fresh
 # clone has no record of which variables the application requires.
-# Leading slash anchors this to the backend root so frontend templates are
-# left exactly as they were.
+# Leading slash anchors this to the backend root.
 !/.env.example
 
 # IDE & OS Caches

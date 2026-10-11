@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class AnalyticsService {
     private final TaskRepository taskRepository;
     private final MeetingRepository meetingRepository;
     private final LearningResourceRepository resourceRepository;
+    private final LearningProgressRepository progressRepository;
 
     public AnalyticsSummaryDto getAnalyticsSummary() {
         long totalEmployees = employeeRepository.count();
@@ -41,7 +43,8 @@ public class AnalyticsService {
 
         double taskCompletionRate = totalTasks > 0 ? Math.round(((double) completedTasks / totalTasks) * 1000.0) / 10.0 : 0.0;
 
-        long upcomingMeetings = meetingRepository.findAll().stream()
+        List<Meeting> meetings = meetingRepository.findAll();
+        long upcomingMeetings = meetings.stream()
                 .filter(m -> "UPCOMING".equalsIgnoreCase(m.getStatus()))
                 .count();
 
@@ -58,14 +61,34 @@ public class AnalyticsService {
         }
 
         List<LearningResource> resources = resourceRepository.findAll();
+        List<LearningProgress> progress = progressRepository.findAll();
+        List<LearningProgress> completedProgress = progress.stream()
+                .filter(p -> p.getStatus() == LearningStatus.COMPLETED)
+                .filter(p -> p.getResource() != null && p.getResource().getCategory() != null)
+                .toList();
+
         List<AnalyticsSummaryDto.CategoryMetric> categoryStats = resources.stream()
-                .map(r -> r.getCategory())
+                .map(LearningResource::getCategory)
+                .filter(Objects::nonNull)
                 .distinct()
                 .map(cat -> {
-                    long total = resources.stream().filter(r -> r.getCategory().equalsIgnoreCase(cat)).count();
-                    return new AnalyticsSummaryDto.CategoryMetric(cat, total, total > 0 ? 1 : 0);
+                    long total = resources.stream()
+                            .filter(r -> cat.equalsIgnoreCase(r.getCategory()))
+                            .count();
+                    long completed = completedProgress.stream()
+                            .filter(p -> cat.equalsIgnoreCase(p.getResource().getCategory()))
+                            .count();
+                    return new AnalyticsSummaryDto.CategoryMetric(cat, total, completed);
                 })
                 .toList();
+
+        long activeLearners = progress.stream()
+                .map(LearningProgress::getEmployee)
+                .filter(Objects::nonNull)
+                .map(Employee::getId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .count();
 
         return AnalyticsSummaryDto.builder()
                 .totalEmployees(totalEmployees)
@@ -77,8 +100,10 @@ public class AnalyticsService {
                 .taskCompletionRate(taskCompletionRate)
                 .upcomingMeetingsCount(upcomingMeetings)
                 .avgProjectCompletion(Math.round(avgCompletion * 10.0) / 10.0)
-                .activeLearnersCount(totalEmployees)
-                .dataSourceNote("Calculated dynamically from live Nexora workspace database records.")
+                .activeLearnersCount(activeLearners)
+                .dataSourceNote(String.format(
+                        "Computed from live database records at request time: %d employee(s), %d project(s), %d task(s), %d meeting(s), %d learning resource(s), %d learning progress record(s).",
+                        totalEmployees, projects.size(), tasks.size(), meetings.size(), resources.size(), progress.size()))
                 .projectStatusDistribution(projectStatusDist)
                 .taskStatusDistribution(taskStatusDist)
                 .learningCategoryStats(categoryStats)

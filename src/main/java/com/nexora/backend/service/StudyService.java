@@ -22,6 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StudyService {
 
+    // No generative AI provider is wired into this deployment. Synthesizing a summary from
+    // fixed prose would present invented text as an analysis of the learner's own notes.
+    private static final String AI_SUMMARY_UNAVAILABLE =
+            "AI summary unavailable: no generative AI provider is configured for this Nexora deployment.";
+
     private final LearningResourceRepository resourceRepository;
     private final LearningProgressRepository progressRepository;
     private final EmployeeRepository employeeRepository;
@@ -69,25 +74,12 @@ public class StudyService {
             progress.setVideoNotes(request.getVideoNotes());
         }
         if (Boolean.TRUE.equals(request.getGenerateAiSummary())) {
-            String textToSummarize = progress.getVideoNotes() != null && !progress.getVideoNotes().isBlank()
-                    ? progress.getVideoNotes()
-                    : resource.getSampleTranscript();
-            progress.setAiSummary(generateTranscriptSummary(textToSummarize));
+            progress.setAiSummary(AI_SUMMARY_UNAVAILABLE);
         }
 
         progress.setLastAccessed(LocalDateTime.now());
         LearningProgress saved = progressRepository.save(progress);
         return mapProgressToDto(saved);
-    }
-
-    private String generateTranscriptSummary(String text) {
-        if (text == null || text.isBlank()) {
-            return "No transcript or notes available to summarize.";
-        }
-        return "[Nexora AI Summary]: " +
-               "1. Key Insights: Explains foundational concepts & enterprise architecture principles.\n" +
-               "2. Tactical Action Items: Practice sample code, integrate with Nexora services, and review security boundaries.\n" +
-               "3. Executive Recommendation: Recommended for team-wide study path rollout.";
     }
 
     public LearningResourceDto mapResourceToDto(LearningResource res) {

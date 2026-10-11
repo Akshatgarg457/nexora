@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class AiResponseDto {
     private String response;
-    private String source; // e.g., "Nexora AI Assistant (Simulated Prototype Service)"
+    private String source; // identifies what produced the answer, e.g. the rule-based workspace query engine
     private String targetWorkspace; // optional navigation hint: MEETINGS, COMMUNICATION, STUDY, PROJECTS, ANALYTICS
     private List<String> suggestedActions;
     private boolean isSimulated;
